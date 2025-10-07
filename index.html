@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Set character encoding to UTF-8 for proper text display -->
+    <meta charset="UTF-8">
+    
+    <!-- Configure viewport for responsive design on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- PWA Configuration -->
+    <meta name="theme-color" content="#2196F3">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Calculator">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Page title displayed in browser tab -->
+    <title>Modern Calculator</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Link to external CSS stylesheet for styling -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main calculator container -->
+    <div class="calculator">
+        <!-- Display section showing current value, results, or error messages -->
+        <div class="display">
+            <!-- Screen element where numbers and results are displayed -->
+            <div id="screen">0</div>
+        </div>
+        
+        <!-- Button container using CSS Grid layout -->
+        <div class="buttons">
+            <!-- Row 1: Numbers 7, 8, 9 and Reset -->
+            <button class="btn number-btn" id="num7">7</button>
+            <button class="btn number-btn" id="num8">8</button>
+            <button class="btn number-btn" id="num9">9</button>
+            <button class="btn reset-btn" id="reset">Reset</button>
+            
+            <!-- Row 2: Numbers 4, 5, 6 and Plus -->
+            <button class="btn number-btn" id="num4">4</button>
+            <button class="btn number-btn" id="num5">5</button>
+            <button class="btn number-btn" id="num6">6</button>
+            <button class="btn operator-btn" id="plus">+</button>
+            
+            <!-- Row 3: Numbers 1, 2, 3 and Minus -->
+            <button class="btn number-btn" id="num1">1</button>
+            <button class="btn number-btn" id="num2">2</button>
+            <button class="btn number-btn" id="num3">3</button>
+            <button class="btn operator-btn" id="minus">-</button>
+            
+            <!-- Row 4: Zero button (spans 3 columns) and Calculate -->
+            <button class="btn number-btn zero-btn" id="num0">0</button>
+            <button class="btn calculate-btn" id="calculate">=</button>
+        </div>
+    </div>
+    
+    <!-- Load JavaScript file for calculator functionality -->
+    <script src="script.js"></script>
+    
+    <!-- PWA Service Worker Registration -->
+    <script>
+        // Enhanced service worker registration with better iOS support
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('./sw.js', {
+                    scope: './'
+                })
+                .then(function(registration) {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    
+                    // Check for updates
+                    registration.addEventListener('updatefound', () => {
+                        console.log('New service worker available');
+                    });
+                })
+                .catch(function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
