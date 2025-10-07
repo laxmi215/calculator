@@ -1,4 +1,8 @@
 # Modern Calculator
+I just modified your code with mine like 
+1.changed the colors,butttons and the grid-layout.
+2.it shows the operator sign which is more responsive or interactive.
+3.Improved zero handling (like no more "09")
 
 A responsive, modern calculator web application with expression display and PWA capabilities.
 
